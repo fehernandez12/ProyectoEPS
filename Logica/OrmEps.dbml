@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CasoEstudio" Class="OrmEpsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=BOGDFPRDC10F400;Initial Catalog=CasoEstudio;Integrated Security=True" SettingsObjectName="Logica.Properties.Settings" SettingsPropertyName="CasoEstudioConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.administrador" Member="administrador">
+    <Type Name="administrador">
+      <Column Name="idAdministrador" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="usuario_administrador" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.usuario_has_permisos" Member="usuario_has_permisos">
+    <Type Name="usuario_has_permisos">
+      <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="permisos_idPermisos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="permisos_usuario_has_permisos" Member="permisos" ThisKey="permisos_idPermisos" OtherKey="idPermisos" Type="permisos" IsForeignKey="true" />
+      <Association Name="usuario_usuario_has_permisos" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.centro_medico" Member="centro_medico">
+    <Type Name="centro_medico">
+      <Column Name="idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="telefonos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="foto" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="nivel_atencion_idNivel_atencion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="eps_idEps" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hora_apertura_idHora_apertura" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="hora_cierre_idHora_cierre" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Association Name="centro_medico_centro_medico_has_especialidad" Member="centro_medico_has_especialidad" ThisKey="idCentro_medico" OtherKey="centro_medico_idCentro_medico" Type="centro_medico_has_especialidad" />
+      <Association Name="centro_medico_tabla_consultas" Member="tabla_consultas" ThisKey="idCentro_medico" OtherKey="centro_medico_idCentro_medico" Type="tabla_consultas" />
+      <Association Name="centro_medico_usuario_has_centro_medico" Member="usuario_has_centro_medico" ThisKey="idCentro_medico" OtherKey="centro_medico_idCentro_medico" Type="usuario_has_centro_medico" />
+      <Association Name="eps_centro_medico" Member="eps" ThisKey="idCentro_medico" OtherKey="idEps" Type="eps" IsForeignKey="true" />
+      <Association Name="hora_apertura_centro_medico" Member="hora_apertura" ThisKey="idCentro_medico" OtherKey="idHora_apertura" Type="hora_apertura" IsForeignKey="true" />
+      <Association Name="hora_cierre_centro_medico" Member="hora_cierre" ThisKey="idCentro_medico" OtherKey="idHora_cierre" Type="hora_cierre" IsForeignKey="true" />
+      <Association Name="Nivel_atencin_centro_medico" Member="Nivel_atencin" ThisKey="idCentro_medico" OtherKey="idNivel_atencion" Type="Nivel_atencin" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.centro_medico_has_especialidad" Member="centro_medico_has_especialidad">
+    <Type Name="centro_medico_has_especialidad">
+      <Column Name="centro_medico_idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="especialidad_idEspecialidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="centro_medico_centro_medico_has_especialidad" Member="centro_medico" ThisKey="centro_medico_idCentro_medico" OtherKey="idCentro_medico" Type="centro_medico" IsForeignKey="true" />
+      <Association Name="especialidad_centro_medico_has_especialidad" Member="especialidad" ThisKey="especialidad_idEspecialidad" OtherKey="idEspecialidad" Type="especialidad" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.eps" Member="eps">
+    <Type Name="eps">
+      <Column Name="idEps" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="nit" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="estado_eps_idEstado_eps" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="eps_centro_medico" Member="centro_medico" ThisKey="idEps" OtherKey="idCentro_medico" Type="centro_medico" Cardinality="One" />
+      <Association Name="eps_usuario" Member="usuario" ThisKey="idEps" OtherKey="idEps" Type="usuario" />
+      <Association Name="estado_eps_eps" Member="estado_eps" ThisKey="idEps" OtherKey="idEstado_eps" Type="estado_eps" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.especialidad" Member="especialidad">
+    <Type Name="especialidad">
+      <Column Name="idEspecialidad" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="especialidad_idEspecialidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="especialidad_centro_medico_has_especialidad" Member="centro_medico_has_especialidad" ThisKey="idEspecialidad" OtherKey="especialidad_idEspecialidad" Type="centro_medico_has_especialidad" />
+      <Association Name="especialidad_especialidad" Member="especialidad2" ThisKey="idEspecialidad" OtherKey="idEspecialidad" Type="especialidad" Cardinality="One" />
+      <Association Name="especialidad_especialidad" Member="especialidad1" ThisKey="idEspecialidad" OtherKey="idEspecialidad" Type="especialidad" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.estado_eps" Member="estado_eps">
+    <Type Name="estado_eps">
+      <Column Name="idEstado_eps" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="estado_eps" Member="estado_eps1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="estado_eps_eps" Member="eps" ThisKey="idEstado_eps" OtherKey="idEps" Type="eps" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.hora_apertura" Member="hora_apertura">
+    <Type Name="hora_apertura">
+      <Column Name="idHora_apertura" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="hora_apertura" Member="hora_apertura1" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Association Name="hora_apertura_centro_medico" Member="centro_medico" ThisKey="idHora_apertura" OtherKey="idCentro_medico" Type="centro_medico" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.hora_cierre" Member="hora_cierre">
+    <Type Name="hora_cierre">
+      <Column Name="idHora_cierre" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="hora_cierre" Member="hora_cierre1" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Association Name="hora_cierre_centro_medico" Member="centro_medico" ThisKey="idHora_cierre" OtherKey="idCentro_medico" Type="centro_medico" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Nivel_atencin" Member="Nivel_atencin">
+    <Type Name="Nivel_atencin">
+      <Column Name="idNivel_atencion" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Association Name="Nivel_atencin_centro_medico" Member="centro_medico" ThisKey="idNivel_atencion" OtherKey="idCentro_medico" Type="centro_medico" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.permisos" Member="permisos">
+    <Type Name="permisos">
+      <Column Name="idPermisos" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="url" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="permiso_padre" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="permisos_usuario_has_permisos" Member="usuario_has_permisos" ThisKey="idPermisos" OtherKey="permisos_idPermisos" Type="usuario_has_permisos" />
+      <Association Name="permisos_permisos" Member="permisos2" ThisKey="idPermisos" OtherKey="idPermisos" Type="permisos" Cardinality="One" />
+      <Association Name="permisos_permisos" Member="permisos1" ThisKey="idPermisos" OtherKey="idPermisos" Type="permisos" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tabla_consultas" Member="tabla_consultas">
+    <Type Name="tabla_consultas">
+      <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="centro_medico_idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="consulta" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="centro_medico_tabla_consultas" Member="centro_medico" ThisKey="centro_medico_idCentro_medico" OtherKey="idCentro_medico" Type="centro_medico" IsForeignKey="true" />
+      <Association Name="usuario_tabla_consultas" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.usuario" Member="usuario">
+    <Type Name="usuario">
+      <Column Name="cedula" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idEps" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="usuario_administrador" Member="administrador" ThisKey="cedula" OtherKey="usuario_cedula" Type="administrador" />
+      <Association Name="usuario_usuario_has_permisos" Member="usuario_has_permisos" ThisKey="cedula" OtherKey="usuario_cedula" Type="usuario_has_permisos" />
+      <Association Name="usuario_tabla_consultas" Member="tabla_consultas" ThisKey="cedula" OtherKey="usuario_cedula" Type="tabla_consultas" />
+      <Association Name="usuario_usuario_has_centro_medico" Member="usuario_has_centro_medico" ThisKey="cedula" OtherKey="usuario_cedula" Type="usuario_has_centro_medico" />
+      <Association Name="eps_usuario" Member="eps" ThisKey="idEps" OtherKey="idEps" Type="eps" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.usuario_has_centro_medico" Member="usuario_has_centro_medico">
+    <Type Name="usuario_has_centro_medico">
+      <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="centro_medico_idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="calificacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="centro_medico_usuario_has_centro_medico" Member="centro_medico" ThisKey="centro_medico_idCentro_medico" OtherKey="idCentro_medico" Type="centro_medico" IsForeignKey="true" />
+      <Association Name="usuario_usuario_has_centro_medico" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_login_admin" Method="sp_login_admin">
+    <Parameter Name="cedula" Type="System.Int32" DbType="Int" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_login_adminResult">
+      <Column Name="idAdministrador" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_login_usuario" Method="sp_login_usuario">
+    <Parameter Name="cedula" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_login_usuarioResult">
+      <Column Name="cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idEps" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_login_eps" Method="sp_login_eps">
+    <Parameter Name="nit" Type="System.String" DbType="VarChar(45)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(45)" />
+    <ElementType Name="sp_login_epsResult">
+      <Column Name="idEps" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="nit" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="direccion" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="telefono" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
+      <Column Name="estado_eps_idEstado_eps" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

@@ -1,0 +1,24 @@
+c:\users\aprendiz\documents\visual studio 2013\Projects\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.dll.config
+c:\users\aprendiz\documents\visual studio 2013\Projects\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.dll
+c:\users\aprendiz\documents\visual studio 2013\Projects\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.pdb
+c:\users\aprendiz\documents\visual studio 2013\Projects\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.csprojResolveAssemblyReference.cache
+c:\users\aprendiz\documents\visual studio 2013\Projects\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.dll
+c:\users\aprendiz\documents\visual studio 2013\Projects\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.pdb
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.csprojAssemblyReference.cache
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.dll.config
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.dll
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.pdb
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\bin\Logica.dll
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\bin\Logica.pdb
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\bin\Logica.dll.config
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.csproj.CopyComplete
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.dll
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.pdb
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.dll.config
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.dll
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\bin\ProyectoEPS.pdb
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\bin\Logica.dll
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\bin\Logica.pdb
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.csprojResolveAssemblyReference.cache
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.dll
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\ProyectoEPS\obj\Debug\ProyectoEPS.pdb

@@ -1,0 +1,12 @@
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\Logica\bin\Debug\Logica.dll.config
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\Logica\bin\Debug\Logica.dll
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\Logica\bin\Debug\Logica.pdb
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\Logica\obj\Debug\Logica.dll
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\Logica\obj\Debug\Logica.pdb
+C:\Users\Guillermo\Downloads\ProyectoEPS-20191206T012756Z-001\ProyectoEPS\Logica\obj\Debug\Logica.csprojAssemblyReference.cache
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\Logica\bin\Debug\Logica.dll.config
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\Logica\bin\Debug\Logica.dll
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\Logica\bin\Debug\Logica.pdb
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\Logica\obj\Debug\Logica.csprojResolveAssemblyReference.cache
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\Logica\obj\Debug\Logica.dll
+C:\Users\APRENDIZ\Downloads\ProyectoEPS-20191210T133959Z-001\ProyectoEPS\Logica\obj\Debug\Logica.pdb
