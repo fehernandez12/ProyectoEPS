@@ -82,14 +82,18 @@
                     <div class="col-md-4 mb-3">
                         <label>EPS:</label>
                         <asp:DropDownList CssClass="form-control" ID="ListaEstadoEps"
-                            runat="server" OnSelectedIndexChanged="ListaEstadoEps_SelectedIndexChanged">
+                            runat="server" OnSelectedIndexChanged="ListaEstadoEps_SelectedIndexChanged" DataSourceID="SqlDataSource1" DataTextField="estado_eps" DataValueField="estado_eps">
                         </asp:DropDownList>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CasoEstudioConnectionString %>" SelectCommand="SELECT [estado_eps] FROM [estado_eps]"></asp:SqlDataSource>
                     </div>
                 </div>
                 <hr class="my-4" />
                 <asp:Button type="submit" CssClass="btn btn-dark" 
                     ID="BotonRegistrar" runat="server" Text="Registrar" OnClick="BotonRegistrar_Click" />
             </form>
+             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         </div>
     </div>
 </body>

@@ -36,6 +36,9 @@ namespace Logica
     partial void Insertcentro_medico(centro_medico instance);
     partial void Updatecentro_medico(centro_medico instance);
     partial void Deletecentro_medico(centro_medico instance);
+    partial void Insertcentro_medico_has_especialidad(centro_medico_has_especialidad instance);
+    partial void Updatecentro_medico_has_especialidad(centro_medico_has_especialidad instance);
+    partial void Deletecentro_medico_has_especialidad(centro_medico_has_especialidad instance);
     partial void Inserteps(eps instance);
     partial void Updateeps(eps instance);
     partial void Deleteeps(eps instance);
@@ -57,13 +60,16 @@ namespace Logica
     partial void Insertpermisos(permisos instance);
     partial void Updatepermisos(permisos instance);
     partial void Deletepermisos(permisos instance);
+    partial void Inserttabla_consultas(tabla_consultas instance);
+    partial void Updatetabla_consultas(tabla_consultas instance);
+    partial void Deletetabla_consultas(tabla_consultas instance);
     partial void Insertusuario(usuario instance);
     partial void Updateusuario(usuario instance);
     partial void Deleteusuario(usuario instance);
     #endregion
 		
 		public OrmEpsDataContext() : 
-				base(global::Logica.Properties.Settings.Default.CasoEstudioConnectionString1, mappingSource)
+				base(global::Logica.Properties.Settings.Default.CasoEstudioConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -258,7 +264,7 @@ namespace Logica
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAdministrador", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAdministrador", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idAdministrador
 		{
 			get
@@ -385,6 +391,8 @@ namespace Logica
 		
 		private int _permisos_idPermisos;
 		
+		private int _id;
+		
 		public usuario_has_permisos()
 		{
 		}
@@ -420,6 +428,22 @@ namespace Logica
 				}
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.centro_medico")]
@@ -445,6 +469,10 @@ namespace Logica
 		private System.TimeSpan _hora_apertura_idHora_apertura;
 		
 		private System.TimeSpan _hora_cierre_idHora_cierre;
+		
+		private EntitySet<centro_medico_has_especialidad> _centro_medico_has_especialidad;
+		
+		private EntitySet<tabla_consultas> _tabla_consultas;
 		
 		private EntityRef<eps> _eps;
 		
@@ -480,6 +508,8 @@ namespace Logica
 		
 		public centro_medico()
 		{
+			this._centro_medico_has_especialidad = new EntitySet<centro_medico_has_especialidad>(new Action<centro_medico_has_especialidad>(this.attach_centro_medico_has_especialidad), new Action<centro_medico_has_especialidad>(this.detach_centro_medico_has_especialidad));
+			this._tabla_consultas = new EntitySet<tabla_consultas>(new Action<tabla_consultas>(this.attach_tabla_consultas), new Action<tabla_consultas>(this.detach_tabla_consultas));
 			this._eps = default(EntityRef<eps>);
 			this._hora_apertura = default(EntityRef<hora_apertura>);
 			this._hora_cierre = default(EntityRef<hora_cierre>);
@@ -487,7 +517,7 @@ namespace Logica
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idCentro_medico", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idCentro_medico", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idCentro_medico
 		{
 			get
@@ -673,6 +703,32 @@ namespace Logica
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="centro_medico_centro_medico_has_especialidad", Storage="_centro_medico_has_especialidad", ThisKey="idCentro_medico", OtherKey="centro_medico_idCentro_medico")]
+		public EntitySet<centro_medico_has_especialidad> centro_medico_has_especialidad
+		{
+			get
+			{
+				return this._centro_medico_has_especialidad;
+			}
+			set
+			{
+				this._centro_medico_has_especialidad.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="centro_medico_tabla_consultas", Storage="_tabla_consultas", ThisKey="idCentro_medico", OtherKey="centro_medico_idCentro_medico")]
+		public EntitySet<tabla_consultas> tabla_consultas
+		{
+			get
+			{
+				return this._tabla_consultas;
+			}
+			set
+			{
+				this._tabla_consultas.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="eps_centro_medico", Storage="_eps", ThisKey="idCentro_medico", OtherKey="idEps", IsForeignKey=true)]
 		public eps eps
 		{
@@ -828,18 +884,65 @@ namespace Logica
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_centro_medico_has_especialidad(centro_medico_has_especialidad entity)
+		{
+			this.SendPropertyChanging();
+			entity.centro_medico = this;
+		}
+		
+		private void detach_centro_medico_has_especialidad(centro_medico_has_especialidad entity)
+		{
+			this.SendPropertyChanging();
+			entity.centro_medico = null;
+		}
+		
+		private void attach_tabla_consultas(tabla_consultas entity)
+		{
+			this.SendPropertyChanging();
+			entity.centro_medico = this;
+		}
+		
+		private void detach_tabla_consultas(tabla_consultas entity)
+		{
+			this.SendPropertyChanging();
+			entity.centro_medico = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.centro_medico_has_especialidad")]
-	public partial class centro_medico_has_especialidad
+	public partial class centro_medico_has_especialidad : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _centro_medico_idCentro_medico;
 		
 		private int _especialidad_idEspecialidad;
 		
+		private int _id;
+		
+		private EntityRef<centro_medico> _centro_medico;
+		
+		private EntityRef<especialidad> _especialidad;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncentro_medico_idCentro_medicoChanging(int value);
+    partial void Oncentro_medico_idCentro_medicoChanged();
+    partial void Onespecialidad_idEspecialidadChanging(int value);
+    partial void Onespecialidad_idEspecialidadChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    #endregion
+		
 		public centro_medico_has_especialidad()
 		{
+			this._centro_medico = default(EntityRef<centro_medico>);
+			this._especialidad = default(EntityRef<especialidad>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_centro_medico_idCentro_medico", DbType="Int NOT NULL")]
@@ -853,7 +956,15 @@ namespace Logica
 			{
 				if ((this._centro_medico_idCentro_medico != value))
 				{
+					if (this._centro_medico.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncentro_medico_idCentro_medicoChanging(value);
+					this.SendPropertyChanging();
 					this._centro_medico_idCentro_medico = value;
+					this.SendPropertyChanged("centro_medico_idCentro_medico");
+					this.Oncentro_medico_idCentro_medicoChanged();
 				}
 			}
 		}
@@ -869,8 +980,124 @@ namespace Logica
 			{
 				if ((this._especialidad_idEspecialidad != value))
 				{
+					if (this._especialidad.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onespecialidad_idEspecialidadChanging(value);
+					this.SendPropertyChanging();
 					this._especialidad_idEspecialidad = value;
+					this.SendPropertyChanged("especialidad_idEspecialidad");
+					this.Onespecialidad_idEspecialidadChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="centro_medico_centro_medico_has_especialidad", Storage="_centro_medico", ThisKey="centro_medico_idCentro_medico", OtherKey="idCentro_medico", IsForeignKey=true)]
+		public centro_medico centro_medico
+		{
+			get
+			{
+				return this._centro_medico.Entity;
+			}
+			set
+			{
+				centro_medico previousValue = this._centro_medico.Entity;
+				if (((previousValue != value) 
+							|| (this._centro_medico.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._centro_medico.Entity = null;
+						previousValue.centro_medico_has_especialidad.Remove(this);
+					}
+					this._centro_medico.Entity = value;
+					if ((value != null))
+					{
+						value.centro_medico_has_especialidad.Add(this);
+						this._centro_medico_idCentro_medico = value.idCentro_medico;
+					}
+					else
+					{
+						this._centro_medico_idCentro_medico = default(int);
+					}
+					this.SendPropertyChanged("centro_medico");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="especialidad_centro_medico_has_especialidad", Storage="_especialidad", ThisKey="especialidad_idEspecialidad", OtherKey="idEspecialidad", IsForeignKey=true)]
+		public especialidad especialidad
+		{
+			get
+			{
+				return this._especialidad.Entity;
+			}
+			set
+			{
+				especialidad previousValue = this._especialidad.Entity;
+				if (((previousValue != value) 
+							|| (this._especialidad.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._especialidad.Entity = null;
+						previousValue.centro_medico_has_especialidad.Remove(this);
+					}
+					this._especialidad.Entity = value;
+					if ((value != null))
+					{
+						value.centro_medico_has_especialidad.Add(this);
+						this._especialidad_idEspecialidad = value.idEspecialidad;
+					}
+					else
+					{
+						this._especialidad_idEspecialidad = default(int);
+					}
+					this.SendPropertyChanged("especialidad");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -1194,6 +1421,8 @@ namespace Logica
 		
 		private System.Nullable<int> _especialidad_idEspecialidad;
 		
+		private EntitySet<centro_medico_has_especialidad> _centro_medico_has_especialidad;
+		
 		private EntityRef<especialidad> _especialidad2;
 		
 		private EntityRef<especialidad> _especialidad1;
@@ -1212,12 +1441,13 @@ namespace Logica
 		
 		public especialidad()
 		{
+			this._centro_medico_has_especialidad = new EntitySet<centro_medico_has_especialidad>(new Action<centro_medico_has_especialidad>(this.attach_centro_medico_has_especialidad), new Action<centro_medico_has_especialidad>(this.detach_centro_medico_has_especialidad));
 			this._especialidad2 = default(EntityRef<especialidad>);
 			this._especialidad1 = default(EntityRef<especialidad>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEspecialidad", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEspecialidad", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idEspecialidad
 		{
 			get
@@ -1278,6 +1508,19 @@ namespace Logica
 					this.SendPropertyChanged("especialidad_idEspecialidad");
 					this.Onespecialidad_idEspecialidadChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="especialidad_centro_medico_has_especialidad", Storage="_centro_medico_has_especialidad", ThisKey="idEspecialidad", OtherKey="especialidad_idEspecialidad")]
+		public EntitySet<centro_medico_has_especialidad> centro_medico_has_especialidad
+		{
+			get
+			{
+				return this._centro_medico_has_especialidad;
+			}
+			set
+			{
+				this._centro_medico_has_especialidad.Assign(value);
 			}
 		}
 		
@@ -1363,6 +1606,18 @@ namespace Logica
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_centro_medico_has_especialidad(centro_medico_has_especialidad entity)
+		{
+			this.SendPropertyChanging();
+			entity.especialidad = this;
+		}
+		
+		private void detach_centro_medico_has_especialidad(centro_medico_has_especialidad entity)
+		{
+			this.SendPropertyChanging();
+			entity.especialidad = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.estado_eps")]
@@ -1393,7 +1648,7 @@ namespace Logica
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEstado_eps", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEstado_eps", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idEstado_eps
 		{
 			get
@@ -1511,7 +1766,7 @@ namespace Logica
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idHora_apertura", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idHora_apertura", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idHora_apertura
 		{
 			get
@@ -1629,7 +1884,7 @@ namespace Logica
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idHora_cierre", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idHora_cierre", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idHora_cierre
 		{
 			get
@@ -1747,7 +2002,7 @@ namespace Logica
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idNivel_atencion", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idNivel_atencion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idNivel_atencion
 		{
 			get
@@ -1872,7 +2127,7 @@ namespace Logica
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPermisos", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idPermisos", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idPermisos
 		{
 			get
@@ -2021,8 +2276,10 @@ namespace Logica
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tabla_consultas")]
-	public partial class tabla_consultas
+	public partial class tabla_consultas : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _usuario_cedula;
 		
@@ -2030,8 +2287,31 @@ namespace Logica
 		
 		private string _consulta;
 		
+		private int _id;
+		
+		private EntityRef<centro_medico> _centro_medico;
+		
+		private EntityRef<usuario> _usuario;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onusuario_cedulaChanging(int value);
+    partial void Onusuario_cedulaChanged();
+    partial void Oncentro_medico_idCentro_medicoChanging(int value);
+    partial void Oncentro_medico_idCentro_medicoChanged();
+    partial void OnconsultaChanging(string value);
+    partial void OnconsultaChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    #endregion
+		
 		public tabla_consultas()
 		{
+			this._centro_medico = default(EntityRef<centro_medico>);
+			this._usuario = default(EntityRef<usuario>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usuario_cedula", DbType="Int NOT NULL")]
@@ -2045,7 +2325,15 @@ namespace Logica
 			{
 				if ((this._usuario_cedula != value))
 				{
+					if (this._usuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onusuario_cedulaChanging(value);
+					this.SendPropertyChanging();
 					this._usuario_cedula = value;
+					this.SendPropertyChanged("usuario_cedula");
+					this.Onusuario_cedulaChanged();
 				}
 			}
 		}
@@ -2061,7 +2349,15 @@ namespace Logica
 			{
 				if ((this._centro_medico_idCentro_medico != value))
 				{
+					if (this._centro_medico.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncentro_medico_idCentro_medicoChanging(value);
+					this.SendPropertyChanging();
 					this._centro_medico_idCentro_medico = value;
+					this.SendPropertyChanged("centro_medico_idCentro_medico");
+					this.Oncentro_medico_idCentro_medicoChanged();
 				}
 			}
 		}
@@ -2077,8 +2373,120 @@ namespace Logica
 			{
 				if ((this._consulta != value))
 				{
+					this.OnconsultaChanging(value);
+					this.SendPropertyChanging();
 					this._consulta = value;
+					this.SendPropertyChanged("consulta");
+					this.OnconsultaChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="centro_medico_tabla_consultas", Storage="_centro_medico", ThisKey="centro_medico_idCentro_medico", OtherKey="idCentro_medico", IsForeignKey=true)]
+		public centro_medico centro_medico
+		{
+			get
+			{
+				return this._centro_medico.Entity;
+			}
+			set
+			{
+				centro_medico previousValue = this._centro_medico.Entity;
+				if (((previousValue != value) 
+							|| (this._centro_medico.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._centro_medico.Entity = null;
+						previousValue.tabla_consultas.Remove(this);
+					}
+					this._centro_medico.Entity = value;
+					if ((value != null))
+					{
+						value.tabla_consultas.Add(this);
+						this._centro_medico_idCentro_medico = value.idCentro_medico;
+					}
+					else
+					{
+						this._centro_medico_idCentro_medico = default(int);
+					}
+					this.SendPropertyChanged("centro_medico");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="usuario_tabla_consultas", Storage="_usuario", ThisKey="usuario_cedula", OtherKey="cedula", IsForeignKey=true)]
+		public usuario usuario
+		{
+			get
+			{
+				return this._usuario.Entity;
+			}
+			set
+			{
+				usuario previousValue = this._usuario.Entity;
+				if (((previousValue != value) 
+							|| (this._usuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._usuario.Entity = null;
+						previousValue.tabla_consultas.Remove(this);
+					}
+					this._usuario.Entity = value;
+					if ((value != null))
+					{
+						value.tabla_consultas.Add(this);
+						this._usuario_cedula = value.cedula;
+					}
+					else
+					{
+						this._usuario_cedula = default(int);
+					}
+					this.SendPropertyChanged("usuario");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -2105,6 +2513,8 @@ namespace Logica
 		
 		private EntitySet<administrador> _administrador;
 		
+		private EntitySet<tabla_consultas> _tabla_consultas;
+		
 		private EntityRef<eps> _eps;
 		
     #region Definiciones de métodos de extensibilidad
@@ -2130,11 +2540,12 @@ namespace Logica
 		public usuario()
 		{
 			this._administrador = new EntitySet<administrador>(new Action<administrador>(this.attach_administrador), new Action<administrador>(this.detach_administrador));
+			this._tabla_consultas = new EntitySet<tabla_consultas>(new Action<tabla_consultas>(this.attach_tabla_consultas), new Action<tabla_consultas>(this.detach_tabla_consultas));
 			this._eps = default(EntityRef<eps>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cedula", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cedula", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int cedula
 		{
 			get
@@ -2291,6 +2702,19 @@ namespace Logica
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="usuario_tabla_consultas", Storage="_tabla_consultas", ThisKey="cedula", OtherKey="usuario_cedula")]
+		public EntitySet<tabla_consultas> tabla_consultas
+		{
+			get
+			{
+				return this._tabla_consultas;
+			}
+			set
+			{
+				this._tabla_consultas.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="eps_usuario", Storage="_eps", ThisKey="idEps", OtherKey="idEps", IsForeignKey=true)]
 		public eps eps
 		{
@@ -2356,6 +2780,18 @@ namespace Logica
 			this.SendPropertyChanging();
 			entity.usuario = null;
 		}
+		
+		private void attach_tabla_consultas(tabla_consultas entity)
+		{
+			this.SendPropertyChanging();
+			entity.usuario = this;
+		}
+		
+		private void detach_tabla_consultas(tabla_consultas entity)
+		{
+			this.SendPropertyChanging();
+			entity.usuario = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.usuario_has_centro_medico")]
@@ -2367,6 +2803,8 @@ namespace Logica
 		private int _centro_medico_idCentro_medico;
 		
 		private int _calificacion;
+		
+		private int _id;
 		
 		public usuario_has_centro_medico()
 		{
@@ -2416,6 +2854,22 @@ namespace Logica
 				if ((this._calificacion != value))
 				{
 					this._calificacion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
 				}
 			}
 		}

@@ -75,6 +75,7 @@
     <Content Include="admin\registrar-usuario.aspx" />
     <Content Include="eps\bienvenido-eps.aspx" />
     <Content Include="eps\main-eps.aspx" />
+    <Content Include="eps\registrar-centro-medico.aspx" />
     <Content Include="usuario\bienvenido-usuario.aspx" />
     <Content Include="css\estilos.css" />
     <Content Include="css\estilos-usuario.css" />
@@ -126,6 +127,13 @@
     </Compile>
     <Compile Include="eps\main-eps.aspx.designer.cs">
       <DependentUpon>main-eps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="eps\registrar-centro-medico.aspx.cs">
+      <DependentUpon>registrar-centro-medico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="eps\registrar-centro-medico.aspx.designer.cs">
+      <DependentUpon>registrar-centro-medico.aspx</DependentUpon>
     </Compile>
     <Compile Include="MessageBox.cs" />
     <Compile Include="usuario\bienvenido-usuario.aspx.cs">

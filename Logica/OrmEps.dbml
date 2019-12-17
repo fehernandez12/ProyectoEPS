@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CasoEstudio" Class="OrmEpsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=BOGDFPRDC10F400;Initial Catalog=CasoEstudio;Integrated Security=True" SettingsObjectName="Logica.Properties.Settings" SettingsPropertyName="CasoEstudioConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-MUJ7FN8;Initial Catalog=CasoEstudio;Integrated Security=True" SettingsObjectName="Logica.Properties.Settings" SettingsPropertyName="CasoEstudioConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.administrador" Member="administrador">
     <Type Name="administrador">
-      <Column Name="idAdministrador" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idAdministrador" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="usuario_administrador" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
@@ -12,13 +12,14 @@
     <Type Name="usuario_has_permisos">
       <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="permisos_idPermisos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="permisos_usuario_has_permisos" Member="permisos" ThisKey="permisos_idPermisos" OtherKey="idPermisos" Type="permisos" IsForeignKey="true" />
       <Association Name="usuario_usuario_has_permisos" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.centro_medico" Member="centro_medico">
     <Type Name="centro_medico">
-      <Column Name="idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idCentro_medico" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="telefonos" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -40,6 +41,7 @@
     <Type Name="centro_medico_has_especialidad">
       <Column Name="centro_medico_idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="especialidad_idEspecialidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="centro_medico_centro_medico_has_especialidad" Member="centro_medico" ThisKey="centro_medico_idCentro_medico" OtherKey="idCentro_medico" Type="centro_medico" IsForeignKey="true" />
       <Association Name="especialidad_centro_medico_has_especialidad" Member="especialidad" ThisKey="especialidad_idEspecialidad" OtherKey="idEspecialidad" Type="especialidad" IsForeignKey="true" />
     </Type>
@@ -60,7 +62,7 @@
   </Table>
   <Table Name="dbo.especialidad" Member="especialidad">
     <Type Name="especialidad">
-      <Column Name="idEspecialidad" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idEspecialidad" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="especialidad_idEspecialidad" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="especialidad_centro_medico_has_especialidad" Member="centro_medico_has_especialidad" ThisKey="idEspecialidad" OtherKey="especialidad_idEspecialidad" Type="centro_medico_has_especialidad" />
@@ -70,35 +72,35 @@
   </Table>
   <Table Name="dbo.estado_eps" Member="estado_eps">
     <Type Name="estado_eps">
-      <Column Name="idEstado_eps" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idEstado_eps" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="estado_eps" Member="estado_eps1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="estado_eps_eps" Member="eps" ThisKey="idEstado_eps" OtherKey="idEps" Type="eps" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.hora_apertura" Member="hora_apertura">
     <Type Name="hora_apertura">
-      <Column Name="idHora_apertura" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idHora_apertura" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="hora_apertura" Member="hora_apertura1" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Association Name="hora_apertura_centro_medico" Member="centro_medico" ThisKey="idHora_apertura" OtherKey="idCentro_medico" Type="centro_medico" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.hora_cierre" Member="hora_cierre">
     <Type Name="hora_cierre">
-      <Column Name="idHora_cierre" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idHora_cierre" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="hora_cierre" Member="hora_cierre1" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Association Name="hora_cierre_centro_medico" Member="centro_medico" ThisKey="idHora_cierre" OtherKey="idCentro_medico" Type="centro_medico" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.Nivel_atencin" Member="Nivel_atencin">
     <Type Name="Nivel_atencin">
-      <Column Name="idNivel_atencion" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idNivel_atencion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(45) NOT NULL" CanBeNull="false" />
       <Association Name="Nivel_atencin_centro_medico" Member="centro_medico" ThisKey="idNivel_atencion" OtherKey="idCentro_medico" Type="centro_medico" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.permisos" Member="permisos">
     <Type Name="permisos">
-      <Column Name="idPermisos" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idPermisos" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="url" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="permiso_padre" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="permisos_usuario_has_permisos" Member="usuario_has_permisos" ThisKey="idPermisos" OtherKey="permisos_idPermisos" Type="usuario_has_permisos" />
@@ -111,13 +113,14 @@
       <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="centro_medico_idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="consulta" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="centro_medico_tabla_consultas" Member="centro_medico" ThisKey="centro_medico_idCentro_medico" OtherKey="idCentro_medico" Type="centro_medico" IsForeignKey="true" />
       <Association Name="usuario_tabla_consultas" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.usuario" Member="usuario">
     <Type Name="usuario">
-      <Column Name="cedula" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cedula" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -136,6 +139,7 @@
       <Column Name="usuario_cedula" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="centro_medico_idCentro_medico" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="calificacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Association Name="centro_medico_usuario_has_centro_medico" Member="centro_medico" ThisKey="centro_medico_idCentro_medico" OtherKey="idCentro_medico" Type="centro_medico" IsForeignKey="true" />
       <Association Name="usuario_usuario_has_centro_medico" Member="usuario" ThisKey="usuario_cedula" OtherKey="cedula" Type="usuario" IsForeignKey="true" />
     </Type>

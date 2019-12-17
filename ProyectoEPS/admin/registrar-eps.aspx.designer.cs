@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace ProyectoEPS.admin {
-    
-    
-    public partial class registrar_eps {
-        
+namespace ProyectoEPS.admin
+{
+
+
+    public partial class registrar_eps
+    {
+
         /// <summary>
         /// Control RegistrarUsuario.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ProyectoEPS.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm RegistrarUsuario;
-        
+
         /// <summary>
         /// Control NombreEps.
         /// </summary>
@@ -29,7 +31,7 @@ namespace ProyectoEPS.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NombreEps;
-        
+
         /// <summary>
         /// Control NitEps.
         /// </summary>
@@ -38,7 +40,7 @@ namespace ProyectoEPS.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NitEps;
-        
+
         /// <summary>
         /// Control DireccionEps.
         /// </summary>
@@ -47,7 +49,7 @@ namespace ProyectoEPS.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DireccionEps;
-        
+
         /// <summary>
         /// Control TelefonoEps.
         /// </summary>
@@ -56,7 +58,7 @@ namespace ProyectoEPS.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TelefonoEps;
-        
+
         /// <summary>
         /// Control PasswordEps.
         /// </summary>
@@ -65,7 +67,7 @@ namespace ProyectoEPS.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PasswordEps;
-        
+
         /// <summary>
         /// Control ListaEstadoEps.
         /// </summary>
@@ -74,7 +76,16 @@ namespace ProyectoEPS.admin {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ListaEstadoEps;
-        
+
+        /// <summary>
+        /// Control SqlDataSource1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+
         /// <summary>
         /// Control BotonRegistrar.
         /// </summary>

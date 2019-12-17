@@ -44,8 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClsAdmin.cs" />
+    <Compile Include="ClsCentroMedico.cs" />
+    <Compile Include="ClsCierre.cs" />
     <Compile Include="ClsEps.cs" />
     <Compile Include="ClsEstadoEps.cs" />
+    <Compile Include="ClsHoraApertura.cs" />
     <Compile Include="ClsUsuario.cs" />
     <Compile Include="OrmEps.designer.cs">
       <AutoGen>True</AutoGen>
